@@ -38,7 +38,7 @@ class _TodaysTaskScreenState extends State<TodaysTaskScreen> {
               return IconButton(
                   onPressed: () {
                     context.read<ThemeBloc>().add(ToggleThemeEvent());
-                  }, icon: Icon(Icons.light_mode_outlined));
+                  }, icon: Icon(isDarkMode ? Icons.light_mode : Icons.light_mode_outlined));
             },
           )
         ],
