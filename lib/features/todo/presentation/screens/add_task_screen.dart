@@ -18,7 +18,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
           icon: SvgPicture.asset(height: 24, width: 24, AssetsPath.arrowBack),
         ),
         title: const Text(
