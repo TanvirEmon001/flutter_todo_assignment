@@ -19,9 +19,13 @@ class AppTheme {
 
   static ThemeData get darkTheme {
     return ThemeData(
-      brightness: Brightness.light,
+      brightness: Brightness.dark,
       colorSchemeSeed: AppColors.themeColor,
       scaffoldBackgroundColor: Colors.white,
+      appBarTheme: AppBarThemeData(
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white
+      ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: AppColors.themeColor,
       ),
