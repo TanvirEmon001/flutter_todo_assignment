@@ -1,31 +1,53 @@
 import 'package:flutter/material.dart';
+import '../data/models/todo_model.dart';
+
 class TaskCardWidget extends StatelessWidget {
-  const TaskCardWidget({super.key});
+  final TodoModel todo;
+
+  const TaskCardWidget({
+    super.key,
+    required this.todo,
+  });
 
   @override
   Widget build(BuildContext context) {
+
+    final String status = todo.completed ? "Done" : "Pending";
+    final Color statusColor = todo.completed
+        ? const Color(0xFF7E57C2)
+        : const Color(0xFFFF9800);
+    final Color statusBgColor = todo.completed
+        ? const Color(0xFFEDE7F6)
+        : const Color(0xFFFFF3E0);
+
     return Container(
-      width: 331,
-      height: 142,
+      width: double.infinity, // Take full width
       padding: const EdgeInsets.all(16),
-      alignment: .center,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: .center,
         children: [
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                "ID: 01",
-                style: TextStyle(
+              Text(
+                "ID: ${todo.id.toString().padLeft(2, '0')}",
+                style: const TextStyle(
                   color: Color(0xFF6E6A7C),
                   fontWeight: FontWeight.w400,
-                  fontSize: 11
+                  fontSize: 11,
                 ),
               ),
               Container(
@@ -43,43 +65,59 @@ class TaskCardWidget extends StatelessWidget {
             ],
           ),
 
-          const Text(
-            "Market Research",
-            style: TextStyle(
+          const SizedBox(height: 8),
+
+
+          Text(
+            todo.todo,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
               fontSize: 14,
-              fontWeight: .w400,
+              fontWeight: FontWeight.w400,
               color: Color(0xFF2D2D2D),
             ),
           ),
 
+          const SizedBox(height: 8),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              // Time information
               Row(
                 children: [
-                  const Icon(Icons.access_time_filled, size: 16, color: Color(0xFF9575CD)),
+                  const Icon(
+                    Icons.access_time_filled,
+                    size: 16,
+                    color: Color(0xFF9575CD),
+                  ),
                   const SizedBox(width: 4),
-                  const Text(
-                    "10:00 AM (10 minutes ago)",
-                    style: TextStyle(
+                  Text(
+                    _getTimeDisplay(),
+                    style: const TextStyle(
                       color: Color(0xFF9575CD),
                       fontSize: 11,
-                      fontWeight: .w400
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                 ],
               ),
+
+              // Status badge
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 2,
+                ),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFEDE7F6),
+                  color: statusBgColor,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Text(
-                  "Done",
+                child: Text(
+                  status,
                   style: TextStyle(
-                    color: Color(0xFF7E57C2),
+                    color: statusColor,
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                   ),
@@ -90,5 +128,10 @@ class TaskCardWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+
+  String _getTimeDisplay() {
+    return "10:00 AM (Today)";
   }
 }
