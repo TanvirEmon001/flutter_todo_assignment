@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_management/core/presentation/bloc/theme/theme_bloc.dart';
-import 'package:todo_management/core/presentation/bloc/theme/theme_bloc.dart';
 import 'package:todo_management/core/utils/assets_path.dart';
 import 'package:todo_management/features/todo/presentation/screens/add_task_screen.dart';
 import 'package:todo_management/features/todo/widgets/dynamic_date_strip.dart';
